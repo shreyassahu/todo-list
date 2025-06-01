@@ -2,6 +2,7 @@ package com.shreyas.tasks.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,7 +28,7 @@ public class TaskList {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "id", updatable = false, nullable = false)
-  private Long id;
+  private UUID id;
 
   @Column(name = "title", nullable = false)
   private String title;
