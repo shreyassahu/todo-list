@@ -45,4 +45,25 @@ public class TaskListServiceImpl implements TaskListService {
   public Optional<TaskListDto> getTaskListById(UUID id) {
     return taskListRepository.findById(id).map(taskListMapper::toDto);
   }
+
+  @Override
+  public TaskListDto updateTaskList(UUID id, TaskListDto taskListDto) {
+    if(taskListDto.id() == null) {
+      throw new IllegalArgumentException("Task list id cannot be empty");
+    }
+    if(!id.equals(taskListDto.id())) {
+      throw new IllegalArgumentException("Task list id does not match");
+    }
+    if(taskListDto.title() == null || taskListDto.title().isBlank()) {
+      throw new IllegalArgumentException("Task list title cannot be empty");
+    }
+    Optional<TaskList> taskList = taskListRepository.findById(id);
+    TaskList updatedTaskList = taskListRepository.save(taskListMapper.fromDto(taskListDto));
+    return taskListMapper.toDto(updatedTaskList);
+  }
+
+  @Override
+  public void deleteTaskListById(UUID id) {
+    taskListRepository.deleteById(id);
+  }
 }
