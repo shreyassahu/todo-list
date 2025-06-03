@@ -1,6 +1,9 @@
 package com.shreyas.tasks.domain.entities;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -50,9 +53,11 @@ public class Task {
   @JoinColumn(name = "task_list_id")
   private TaskList taskList;
 
+  @CreationTimestamp
   @Column(name = "created", nullable = false)
   private LocalDateTime created;
 
+  @UpdateTimestamp
   @Column(name = "updated", nullable = false)
   private LocalDateTime modified;
 
