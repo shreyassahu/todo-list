@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class TaskListServiceImpl implements TaskListService {
 
@@ -46,6 +48,7 @@ public class TaskListServiceImpl implements TaskListService {
     return taskListRepository.findById(id).map(taskListMapper::toDto);
   }
 
+  @Transactional
   @Override
   public TaskListDto updateTaskList(UUID id, TaskListDto taskListDto) {
     if(taskListDto.id() == null) {
